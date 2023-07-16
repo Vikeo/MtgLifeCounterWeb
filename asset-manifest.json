@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/LifeTrinket/static/css/main.1c8a30f4.css",
-    "main.js": "/LifeTrinket/static/js/main.65c68aed.js",
+    "main.js": "/LifeTrinket/static/js/main.ea84f537.js",
     "static/js/787.28cb0dcd.chunk.js": "/LifeTrinket/static/js/787.28cb0dcd.chunk.js",
     "index.html": "/LifeTrinket/index.html",
     "main.1c8a30f4.css.map": "/LifeTrinket/static/css/main.1c8a30f4.css.map",
-    "main.65c68aed.js.map": "/LifeTrinket/static/js/main.65c68aed.js.map",
+    "main.ea84f537.js.map": "/LifeTrinket/static/js/main.ea84f537.js.map",
     "787.28cb0dcd.chunk.js.map": "/LifeTrinket/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1c8a30f4.css",
-    "static/js/main.65c68aed.js"
+    "static/js/main.ea84f537.js"
   ]
 }
