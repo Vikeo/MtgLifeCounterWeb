@@ -11,6 +11,8 @@ import {
   Poison,
 } from '../../Icons/generated';
 import { usePlayers } from '../../Hooks/usePlayers';
+import { useGlobalSettings } from '../../Hooks/useGlobalSettings';
+import { GameFormat } from '../../Types/Settings';
 
 const Container = styled.div<{ $rotation: Rotation }>`
   width: 100%;
@@ -61,6 +63,7 @@ type ExtraCountersBarProps = {
 
 const ExtraCountersBar = ({ player }: ExtraCountersBarProps) => {
   const { updatePlayer } = usePlayers();
+  const { initialGameSettings } = useGlobalSettings();
 
   const handleCounterChange = (
     updatedCounterTotal: number,
@@ -116,6 +119,9 @@ const ExtraCountersBar = ({ player }: ExtraCountersBarProps) => {
   if (!hasExtraCounters) {
     return null;
   }
+
+  const isTwoHeadedGiant =
+    initialGameSettings?.gameFormat === GameFormat.TwoHeadedGiant;
 
   return (
     <Container $rotation={player.settings.rotation}>

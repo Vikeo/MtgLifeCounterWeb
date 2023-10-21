@@ -14,4 +14,8 @@ export type InitialGameSettings = {
   gridAreas: GridTemplateAreas;
 };
 
-type GameFormat = 'commander' | 'standard' | 'two-headed-giant';
+export enum GameFormat {
+  Commander = 'commander',
+  Standard = 'standard',
+  TwoHeadedGiant = 'two-headed-giant',
+}

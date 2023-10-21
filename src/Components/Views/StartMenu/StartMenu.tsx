@@ -1,4 +1,11 @@
-import { Button, FormControl, FormLabel, Switch } from '@mui/material';
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  MenuItem,
+  Select,
+  Switch,
+} from '@mui/material';
 import Slider from '@mui/material/Slider';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -14,7 +21,7 @@ import LayoutOptions from './LayoutOptions';
 import { Spacer } from '../../Misc/Spacer';
 import { usePlayers } from '../../../Hooks/usePlayers';
 import { useGlobalSettings } from '../../../Hooks/useGlobalSettings';
-import { InitialGameSettings } from '../../../Types/Settings';
+import { GameFormat, InitialGameSettings } from '../../../Types/Settings';
 import { SettingsModal } from '../../Misc/SettingsModal';
 
 const MainWrapper = styled.div`
@@ -118,6 +125,7 @@ const Start = () => {
       numberOfPlayers: 4,
       startingLifeTotal: 40,
       useCommanderDamage: true,
+      gameFormat: GameFormat.Commander,
       gridAreas: GridTemplateAreas.FourPlayers,
     }
   );
@@ -214,7 +222,11 @@ const Start = () => {
 
       <H1>Life Trinket</H1>
       <FormControl focused={false} style={{ width: '80vw' }}>
-        <FormLabel>Number of Players</FormLabel>
+        <FormLabel>
+          {playerOptions.gameFormat === GameFormat.TwoHeadedGiant
+            ? 'Number of Teams'
+            : 'Number of Players'}
+        </FormLabel>
         <Slider
           title="Number of Players"
           max={6}
@@ -253,29 +265,37 @@ const Start = () => {
 
         <ToggleButtonsWrapper>
           <ToggleContainer>
-            <FormLabel>Commander</FormLabel>
+            <FormLabel>Use Commander Damage</FormLabel>
             <Switch
-              checked={
-                playerOptions.useCommanderDamage ??
-                initialGameSettings?.useCommanderDamage ??
-                true
-              }
+              disabled={playerOptions.gameFormat === GameFormat.Commander}
+              checked={playerOptions.useCommanderDamage}
               onChange={(_e, value) => {
-                if (value) {
-                  setPlayerOptions({
-                    ...playerOptions,
-                    useCommanderDamage: value,
-                    numberOfPlayers: 4,
-                    startingLifeTotal: 40,
-                  });
-                  return;
+                switch (playerOptions.gameFormat) {
+                  case GameFormat.TwoHeadedGiant:
+                    if (value) {
+                      setPlayerOptions({
+                        ...playerOptions,
+                        useCommanderDamage: value,
+                        startingLifeTotal: 60,
+                      });
+                      return;
+                    }
+                    setPlayerOptions({
+                      ...playerOptions,
+                      useCommanderDamage: value,
+                      startingLifeTotal: 30,
+                    });
+                    return;
+
+                  case GameFormat.Standard:
+                  case GameFormat.Commander:
+                  default:
+                    setPlayerOptions({
+                      ...playerOptions,
+                      useCommanderDamage: value,
+                    });
+                    return;
                 }
-                setPlayerOptions({
-                  ...playerOptions,
-                  useCommanderDamage: value,
-                  numberOfPlayers: 2,
-                  startingLifeTotal: 20,
-                });
               }}
             />
           </ToggleContainer>
@@ -289,6 +309,51 @@ const Start = () => {
             <Cog /> &nbsp; Other settings
           </Button>
         </ToggleButtonsWrapper>
+
+        <FormLabel>Format</FormLabel>
+        <Select
+          value={playerOptions.gameFormat}
+          onChange={(e) => {
+            switch (e.target.value) {
+              case GameFormat.Standard:
+                setPlayerOptions({
+                  ...playerOptions,
+                  useCommanderDamage: false,
+                  numberOfPlayers: 2,
+                  startingLifeTotal: 20,
+                  gameFormat: GameFormat.Standard,
+                });
+                return;
+
+              case GameFormat.TwoHeadedGiant:
+                setPlayerOptions({
+                  ...playerOptions,
+                  useCommanderDamage: false,
+                  numberOfPlayers: 2,
+                  startingLifeTotal: 30,
+                  gameFormat: GameFormat.TwoHeadedGiant,
+                });
+                return;
+
+              case GameFormat.Commander:
+              default:
+                setPlayerOptions({
+                  ...playerOptions,
+                  useCommanderDamage: true,
+                  numberOfPlayers: 4,
+                  startingLifeTotal: 40,
+                  gameFormat: GameFormat.Commander,
+                });
+                return;
+            }
+          }}
+        >
+          <MenuItem value={GameFormat.Commander}>Commander</MenuItem>
+          <MenuItem value={GameFormat.Standard}>Standard</MenuItem>
+          <MenuItem value={GameFormat.TwoHeadedGiant}>
+            Two Headed Giant
+          </MenuItem>
+        </Select>
 
         <FormLabel>Layout</FormLabel>
         <LayoutOptions
