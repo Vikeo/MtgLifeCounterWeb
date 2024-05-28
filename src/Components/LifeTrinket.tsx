@@ -7,7 +7,7 @@ const StartWrapper = twc.div`max-w-fit max-h-fit`;
 
 const PlayWrapper = twc.div`relative z-0 max-w-fit max-h-fit portrait:rotate-90`;
 
-const EmergencyResetButton = () => {
+export const EmergencyResetButton = () => {
   const { goToStart } = useGlobalSettings();
 
   const EmergencyResetButton = twc.button`w-[100dvmax] h-[100dvmin] absolute top-0 z-[-1] bg-background-default`;

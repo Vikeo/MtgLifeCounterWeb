@@ -1,5 +1,7 @@
 import { ReactNode, useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useWakeLock } from 'react-screen-wake-lock';
+import { gte as semverGreaterThanOrEqual } from 'semver';
 import {
   GlobalSettingsContext,
   GlobalSettingsContextType,
@@ -14,13 +16,13 @@ import {
   initialGameSettingsSchema,
   settingsSchema,
 } from '../Types/Settings';
-import { gte as semverGreaterThanOrEqual } from 'semver';
 
 export const GlobalSettingsProvider = ({
   children,
 }: {
   children: ReactNode;
 }) => {
+  const navigate = useNavigate();
   const analytics = useAnalytics();
 
   const localSavedGame = localStorage.getItem('savedGame');
@@ -101,6 +103,7 @@ export const GlobalSettingsProvider = ({
     localStorage.removeItem('showPlay');
     localStorage.removeItem('preStartComplete');
 
+    //TODO Playing can be removed after routes are implemented
     setPlaying(false);
     setShowPlay(false);
     setPreStartCompleted(false);
@@ -187,6 +190,8 @@ export const GlobalSettingsProvider = ({
       }
 
       await removeLocalStorage();
+
+      navigate('/');
     };
 
     const toggleWakeLock = async () => {

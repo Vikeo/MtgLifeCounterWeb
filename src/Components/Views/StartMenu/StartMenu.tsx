@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { twc } from 'react-twc';
 import { createInitialPlayers } from '../../../Data/getInitialPlayers';
 import { useAnalytics } from '../../../Hooks/useAnalytics';
@@ -49,6 +50,7 @@ export const LabelText = twc.div`text-md text-text-primary font-medium`;
 let tracked = false;
 
 const Start = () => {
+  const navigate = useNavigate();
   const { setPlayers } = usePlayers();
   const analytics = useAnalytics();
   const {
@@ -186,6 +188,10 @@ const Start = () => {
     setShowPlay(true);
     setPlaying(false);
     tracked = false;
+
+    console.log('haha');
+
+    navigate('/play');
   };
 
   const doResumeGame = () => {
@@ -218,6 +224,8 @@ const Start = () => {
     setShowPlay(true);
     setPlaying(true);
     tracked = false;
+
+    navigate('/play');
   };
 
   const openInfo = () => {

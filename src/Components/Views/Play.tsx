@@ -6,6 +6,7 @@ import { usePlayers } from '../../Hooks/usePlayers';
 import { Orientation, PreStartMode } from '../../Types/Settings';
 import { Players } from '../Players/Players';
 import { PreStart } from '../PreStartGame/PreStart';
+import { createInitialPlayers } from '../../Data/getInitialPlayers';
 
 const MainWrapper = twc.div`w-[100dvmax] h-[100dvmin] overflow-hidden, setPlayers`;
 
@@ -93,6 +94,12 @@ export const Play = () => {
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Fall back to creating players if there are none, in the case where someone's first visit to the
+  // site is to the /play route
+  if (players.length <= 0) {
+    setPlayers(createInitialPlayers(initialGameSettings));
+  }
 
   if (
     players.length > 1 &&
