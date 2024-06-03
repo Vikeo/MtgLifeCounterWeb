@@ -36,9 +36,9 @@ const standardSettings: Pick<
   orientation: Orientation.Landscape,
 };
 
-const MainWrapper = twc.div`h-fit w-full pb-24 overflow-hidden items-center flex flex-col min-[349px]:pb-10`;
+const MainWrapper = twc.div`h-fit w-full pb-24 overflow-hidden items-center flex flex-col min-[349px]:pb-10 z-10`;
 
-const StartButtonFooter = twc.div`w-full max-w-[548px] fixed bottom-4 z-1 items-center flex flex-row flex-wrap px-4 z-10 gap-4`;
+const StartButtonFooter = twc.div`w-full max-w-[548px] fixed bottom-4 z-10 items-center flex flex-row flex-wrap px-4 gap-4`;
 
 const SliderWrapper = twc.div`mx-8 relative`;
 
@@ -237,14 +237,14 @@ const Start = () => {
     <>
       <InfoDialog dialogRef={infoDialogRef} />
       {settings.showAnimations && (
-        <>
+        <div className="blob-container">
           <div className="spotlight1" />
           <div className="spotlight2" />
-        </>
+        </div>
       )}
 
       <SettingsDialog dialogRef={settingsDialogRef} />
-      <div className="flex justify-center items-center w-screen">
+      <div className="flex justify-center items-center w-screen z-10">
         <MainWrapper>
           <Info
             className="size-8 absolute top-7 left-4 text-primary-main"

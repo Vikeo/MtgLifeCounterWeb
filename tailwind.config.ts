@@ -13,7 +13,7 @@ export const baseColors = {
   },
   background: {
     default: '#2E3041', // Orig: #35374B
-    spotlight: '#777BA7',
+    spotlight: 'hsl(110, 80.4%, 32.1%)',
     backdrop: 'rgba(0, 0, 0, 0.3)',
     settings: 'rgba(0, 0, 0, 0.8)',
   },

@@ -81,86 +81,6 @@ code {
   }
 }
 
-@keyframes background-orb {
-  0% {
-    bottom: 10%;
-  }
-  50% {
-    bottom: 90%;
-  }
-
-  100% {
-    bottom: 10%;
-  }
-}
-
-@keyframes move-right-left {
-  0% {
-    rotate: 0deg;
-    right: 10%;
-  }
-
-  25% {
-    right: 70%;
-  }
-
-  50% {
-    rotate: 360deg;
-    right: 10%;
-  }
-
-  75% {
-    right: 90%;
-  }
-
-  100% {
-    rotate: 0deg;
-    right: 10%;
-  }
-}
-
-.spotlight1 {
-  background: theme('colors.background.default');
-
-  position: fixed;
-  height: 10vmax;
-  width: 30vmax;
-  border-radius: 100%;
-  transform: translate(50%, 50%);
-  animation-duration: 30s, 60s;
-  animation-name: background-orb, move-right-left;
-  animation-iteration-count: infinite, infinite;
-  animation-direction: alternate, alternate;
-  animation-timing-function: ease-in-out;
-
-  animation-delay: -15s, -15s;
-
-  opacity: 0.8;
-  mix-blend-mode: screen;
-
-  filter: blur(10vmax);
-}
-
-.spotlight2 {
-  background: theme('colors.background.default');
-
-  position: fixed;
-  height: 30vmax;
-  width: 10vmax;
-  border-radius: 100%;
-  transform: translate(50%, 50%);
-  animation-duration: 60s, 120s;
-  animation-name: background-orb, move-right-left;
-  animation-iteration-count: infinite, infinite;
-  animation-direction: reverse, reverse;
-  animation-timing-function: ease-in-out;
-
-  opacity: 0.8;
-  mix-blend-mode: screen;
-
-  filter: blur(10vmax);
-}
-
 input[type='range'] {
   -webkit-appearance: none;
   transition: background 0ms ease-in;
@@ -228,4 +148,93 @@ input[type='range']::-ms-thumb {
   background: theme('colors.primary.main');
   cursor: pointer;
   margin-top: -3px;
+}
+
+.blob-container {
+  margin: auto;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  filter: blur(10vmax) contrast(10);
+  z-index: 9;
+  background: theme('colors.background.default');
+  mix-blend-mode: screen;
+
+  opacity: 30%;
+}
+
+@keyframes background-orb {
+  0% {
+    bottom: 10%;
+  }
+  50% {
+    bottom: 70%;
+  }
+
+  100% {
+    bottom: 10%;
+  }
+}
+
+@keyframes move-right-left {
+  0% {
+    rotate: 0deg;
+    right: 10%;
+  }
+
+  25% {
+    right: 20%;
+  }
+
+  50% {
+    rotate: 360deg;
+    right: 10%;
+  }
+
+  75% {
+    right: 30%;
+  }
+
+  100% {
+    rotate: 0deg;
+    right: 10%;
+  }
+}
+
+.spotlight1 {
+  background: theme('colors.background.spotlight');
+
+  position: fixed;
+  height: 20vmax;
+  width: 70vmax;
+  border-radius: 100%;
+  transform: translate(50%, 50%);
+  animation-duration: 15s, 50s;
+  animation-name: background-orb, move-right-left;
+  animation-iteration-count: infinite, infinite;
+  animation-direction: alternate, alternate;
+  animation-timing-function: ease-in-out;
+
+  animation-delay: -15s, -15s;
+
+  /* filter: blur(5vmax); */
+}
+
+.spotlight2 {
+  background: theme('colors.background.spotlight');
+
+  position: fixed;
+  height: 70vmax;
+  width: 20vmax;
+  border-radius: 100%;
+  transform: translate(50%, 50%);
+  animation-duration: 30s, 100s;
+  animation-name: background-orb, move-right-left;
+  animation-iteration-count: infinite, infinite;
+  animation-direction: reverse, reverse;
+  animation-timing-function: ease-in-out;
+
+  /* filter: blur(5vmax); */
 }
